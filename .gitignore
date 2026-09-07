@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+venv312/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Data & Models
+data/CMAPSSData/*.txt
+data/CMAPSSData/*.zip
+!data/CMAPSSData/.gitkeep
+models/*.pth
+models/*.json
+!models/.gitkeep
+
+# IDE & System
+.DS_Store
+.vscode/
+.idea/
+.pytest_cache/
+*.log

@@ -1,0 +1,42 @@
+data:
+  cmapss_url: "https://raw.githubusercontent.com/katefeller/NASA-Turbofan-FD001/main/train_FD001.txt"
+  cmapss_test_url: "https://raw.githubusercontent.com/katefeller/NASA-Turbofan-FD001/main/test_FD001.txt"
+  cmapss_rul_url: "https://raw.githubusercontent.com/katefeller/NASA-Turbofan-FD001/main/RUL_FD001.txt"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  max_rul_cap: 125  # Standard benchmark cap for NASA C-MAPSS RUL
+
+features:
+  rolling_windows: [5, 10, 20]
+  vibration_sensors: ["sensor_2", "sensor_3", "sensor_4", "sensor_7", "sensor_11", "sensor_12", "sensor_15"]
+  failure_horizon_cycles: 30
+
+models:
+  autoencoder:
+    latent_dim: 8
+    hidden_dims: [32, 16]
+    epochs: 10
+    batch_size: 64
+    learning_rate: 0.001
+    anomaly_threshold_percentile: 95
+    model_path: "models/autoencoder.pth"
+  
+  xgb_classifier:
+    max_depth: 5
+    n_estimators: 50
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    model_path: "models/xgb_classifier.json"
+
+  xgb_regressor:
+    max_depth: 5
+    n_estimators: 50
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    model_path: "models/xgb_regressor.json"
+
+api:
+  host: "0.0.0.0"
+  port: 8000
